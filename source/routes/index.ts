@@ -2,8 +2,8 @@ import express from 'express';
 import test from './test';
 
 /* librarian endpoints */
-// post /books endpoint to add book
-// delete /books/bookId endpoint to remove book by internal id
+// post /books endpoint to add book NEEDS TO BE ADDED BY ISBN, CAN JUST INCREMENT ID COUNTER TO CREATE THE BOOK ITSELF
+// delete /books/bookId endpoint to remove book NEEDS TO BE REMOVED BY INTERNAL ID
 // get /books/overdue endpoint to generate list of overdue books
 
 /* user end points */

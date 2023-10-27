@@ -1,7 +1,15 @@
 class Librarian {
-    id: Number;
+    private _id: number;
 
-    constructor(id: Number) {
-        this.id = id;
+    constructor(id: number) {
+        this._id = id;
+    }
+
+    public get id(): number {
+        return this._id;
+    }
+
+    public set id(id: number) {
+        this._id = id;
     }
 }
