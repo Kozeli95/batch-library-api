@@ -173,28 +173,4 @@ class Library {
         let user = this.users.get(userId)!;
         return user.books;
     }
-
-    // private getBookById(id: Number): Book {
-    //     if(!this.books.has(id)) {
-    //         throw new Error("Book with ID " + id + " does not exist in our library. Try checking out another!");
-    //     } else {
-    //         return this.books.get(id)!;
-    //     }
-    // }
-
-    // private getLibrarianByID(id: Number): Librarian {
-    //     for (var librarian of this.librarians) {
-    //         if (librarian.id === id) { return librarian; }
-    //     }
-
-    //     throw new Error("Librarian with ID " + id + " does not exist in our library. Try searching for another.");
-    // }
-
-    // private getUserByID(id: Number): User {
-    //     for (var user of this.users) {
-    //         if (user.id === id) { return user; }
-    //     }
-
-    //     throw new Error("User with ID " + id + " does not exist in our library. Try searching for another.");
-    // }
 }
