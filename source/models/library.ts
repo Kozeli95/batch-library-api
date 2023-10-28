@@ -45,7 +45,7 @@ class Library {
         if (this.books.has(id)) {
             throw new Error(`Book with ID ${id} already exists in our library.`);
         }
-        let book = new Book (id, ISBN, title, author);
+        let book = new Book(id, ISBN, title, author);
         this.books.set(id, book)
     }
 
@@ -76,7 +76,7 @@ class Library {
     }
 
     //user checkoutBook put endpoint logic
-    public checkoutBook(bookId: number, userId: number) {
+    public checkoutBook(bookId: number, userId: number): void {
         //check if book doesn't exist
         if (!this.books.has(bookId)) {
             throw new Error(`Cannot checkout book with ID ${bookId}, as it does not exist in our library.`);
@@ -124,7 +124,7 @@ class Library {
     }
 
     //user returnBook put endpoint logic
-    public returnBook(bookId: number, userId: number) {
+    public returnBook(bookId: number, userId: number): void {
         //check if book doesn't exist
         if (!this.books.has(bookId)) {
             throw new Error(`Cannot checkout book with ID ${bookId}, as it does not exist in our library.`);

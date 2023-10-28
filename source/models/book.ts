@@ -84,9 +84,9 @@ class Book {
     }
 
     public isOverdue(): boolean {
-        if (this.checkoutDate !== null && this.dueDate !== null) {
+        if (this.checkedOut) {
             let date = new Date();
-            return date.getTime() > this.dueDate.getTime();
+            return date.getTime() > this.dueDate!.getTime();
         }
         return false;
     }
