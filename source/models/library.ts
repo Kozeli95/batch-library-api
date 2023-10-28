@@ -4,7 +4,7 @@ class Library {
     private _users: Map<number, User>;
 
     constructor() {
-        this._books = new Map<number, Book>;
+        this._books = new Map<number, Book>();
         this._librarians = new Map<number, Librarian>([
             [1, new Librarian(1)]
         ]);
@@ -109,6 +109,8 @@ class Library {
         //update book properties
         book.checkedOut = true;
         book.checkoutDate = new Date();
+        book.dueDate = new Date(); //initialize due date so it's not null anymore
+        book.dueDate.setDate(book.checkoutDate.getDate() + 14); //set due date to two weeks after checkout date
         book.checkedOutUser = user;
 
         //update library book map with new book properties
@@ -148,6 +150,7 @@ class Library {
         //update book properties
         book.checkedOut = false;
         book.checkoutDate = null;
+        book.dueDate = null;
         book.checkedOutUser = null;
 
         //update library book map with new book properties

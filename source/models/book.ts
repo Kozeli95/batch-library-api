@@ -6,6 +6,7 @@ class Book {
     private _checkedOut: boolean;
     private _checkedOutUser: User | null;
     private _checkoutDate: Date | null;
+    private _dueDate: Date | null;
 
     constructor(id: number, ISBN: string, title: string, author: string) {
         this._id = id;
@@ -15,6 +16,7 @@ class Book {
         this._checkedOut = false;
         this._checkedOutUser = null;
         this._checkoutDate = null;
+        this._dueDate = null;
     }
 
     public get id(): number {
@@ -73,7 +75,19 @@ class Book {
         this._checkoutDate = checkoutDate;
     }
 
+    public get dueDate(): Date | null {
+        return this._dueDate;
+    }
+
+    public set dueDate(dueDate: Date | null) {
+        this._dueDate = dueDate;
+    }
+
     public isOverdue(): boolean {
-        return true; //if checkedOut is true, check to see if 2 weeks have passed from the checkout date
+        if (this.checkoutDate !== null && this.dueDate !== null) {
+            let date = new Date();
+            return date.getTime() > this.dueDate.getTime();
+        }
+        return false;
     }
 }
