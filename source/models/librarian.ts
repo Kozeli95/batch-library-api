@@ -1,4 +1,4 @@
-class Librarian {
+export class Librarian {
     private _id: number;
 
     constructor(id: number) {

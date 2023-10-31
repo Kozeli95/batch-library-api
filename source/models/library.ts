@@ -1,4 +1,8 @@
-class Library {
+import { Book } from './book';
+import { Librarian } from './librarian';
+import { User } from './user';
+
+export class Library {
     private _books: Map<number, Book>;
     private _librarians: Map<number, Librarian>;
     private _users: Map<number, User>;
@@ -66,8 +70,7 @@ class Library {
     //librarian getOverdueBooks get endpoint logic
     public getOverdueBooks(): Book[] {
         let overdueBooks = [];
-        for (let id of this.books.keys()) {
-            let book = this.books.get(id)!;
+        for (let book of this.books.values()) {
             if (book.isOverdue()) {
                 overdueBooks.push(book);
             }

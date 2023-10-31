@@ -1,4 +1,6 @@
-class User {
+import { Book } from './book';
+
+export class User {
     private _id: number;
     private _books: Book[];
 

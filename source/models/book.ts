@@ -1,4 +1,6 @@
-class Book {
+import { User } from './user';
+
+export class Book {
     private _id: number;
     private _ISBN: string;
     private _title: string;
