@@ -105,7 +105,9 @@ export const checkoutBook = async (req: Request, res: Response) => {
 
     try {
         library.checkoutBook(bookIdNumber, userIdNumber);
-        res.sendStatus(200);
+        res.status(200).send({
+            checkedOutBook: bookIdNumber
+        });
     } catch (e) {
         errorMessage(res, e);
     }
@@ -124,7 +126,9 @@ export const returnBook = async (req: Request, res: Response) => {
     
     try {
         library.returnBook(bookIdNumber, userIdNumber);
-        res.sendStatus(200);
+        res.status(200).send({
+            returnedBook: bookIdNumber
+        });
     } catch (e) {
         errorMessage(res, e);
     }
