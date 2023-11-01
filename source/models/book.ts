@@ -6,7 +6,6 @@ export class Book {
     private _title: string;
     private _author: string;
     private _checkedOut: boolean;
-    private _checkedOutUser: User | null;
     private _checkoutDate: Date | null;
     private _dueDate: Date | null;
 
@@ -16,7 +15,6 @@ export class Book {
         this._title = title;
         this._author = author;
         this._checkedOut = false;
-        this._checkedOutUser = null;
         this._checkoutDate = null;
         this._dueDate = null;
     }
@@ -59,14 +57,6 @@ export class Book {
 
     public set checkedOut(checkedOut: boolean) {
         this._checkedOut = checkedOut;
-    }
-
-    public get checkedOutUser(): User | null {
-        return this._checkedOutUser;
-    }
-
-    public set checkedOutUser(checkedOutUser: User | null) {
-        this._checkedOutUser = checkedOutUser;
     }
 
     public get checkoutDate(): Date | null{

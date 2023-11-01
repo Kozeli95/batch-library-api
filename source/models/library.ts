@@ -61,7 +61,7 @@ export class Library {
         }
 
         //check if book is currently checked out
-        if (this._books.get(id)!.checkedOut) {
+        if (this.books.get(id)!.checkedOut) {
             throw new Error(`Cannot delete book with ID ${id}, as it is currently checked out by a user`);
         }
         this.books.delete(id);
@@ -90,23 +90,23 @@ export class Library {
             throw new Error(`User with ID ${userId} does not exist in our library.`);
         }
 
-        let user = this.users.get(userId)!;
-        //check if user has 3 books checked out already
-        if (user.books.length >= 3) {
-            throw new Error(`User with ID ${userId} cannot have more than 3 books checked out at once.`);
-        }
-
-        //check if user has an overdue book
-        for (let book of user.books) {
-            if (book.isOverdue()) {
-                throw new Error(`User with ID ${userId} has an overdue book with ID ${book.id}.`);
-            }
-        }
-
         let book = this.books.get(bookId)!;
         //check if book has already been checked out
         if (book.checkedOut) {
             throw new Error(`Book with ID ${bookId} has already been checked out.`);
+        }
+
+        let user = this.users.get(userId)!;
+        //check if user has 3 books checked out already
+        if (user.books.size >= 3) {
+            throw new Error(`User with ID ${userId} cannot have more than 3 books checked out at once.`);
+        }
+
+        //check if user has an overdue book
+        for (let book of user.books.values()) {
+            if (book.isOverdue()) {
+                throw new Error(`User with ID ${userId} has an overdue book with ID ${book.id}.`);
+            }
         }
 
         //update book properties
@@ -114,13 +114,12 @@ export class Library {
         book.checkoutDate = new Date();
         book.dueDate = new Date(); //initialize due date so it's not null anymore
         book.dueDate.setDate(book.checkoutDate.getDate() + 14); //set due date to two weeks after checkout date
-        book.checkedOutUser = user;
 
         //update library book map with new book properties
         this.books.set(bookId, book);
 
-        //add book to user's list
-        user.books.push(book);
+        //add book to user's book map
+        user.books.set(bookId, book);
 
         //update library user map with new user properties
         this.users.set(userId, user);
@@ -146,7 +145,7 @@ export class Library {
         }
 
         //check if book is not already checked out by user
-        if (book.checkedOutUser!.id !== user.id) {
+        if (!user.books.has(bookId)) {
             throw new Error(`Book with ID ${bookId} is currently checked out, but not by user ${userId}.`);
         }
 
@@ -154,17 +153,12 @@ export class Library {
         book.checkedOut = false;
         book.checkoutDate = null;
         book.dueDate = null;
-        book.checkedOutUser = null;
 
         //update library book map with new book properties
         this.books.set(bookId, book);
 
-        //remove book from user's list
-        user.books.forEach((bk, index) => {
-            if (bk.id === bookId) {
-                user.books.splice(index, 1);
-            }
-        });
+        //remove book from user's map
+        user.books.delete(bookId);
 
         //update library user map with new user properties
         this.users.set(userId, user);
@@ -176,7 +170,12 @@ export class Library {
             throw new Error(`User with ID ${userId} does not exist in our library.`);
         }
 
+        let books = [];
         let user = this.users.get(userId)!;
-        return user.books;
+        for (let book of user.books.values()) {
+            books.push(book);
+        }
+        
+        return books;
     }
 }
