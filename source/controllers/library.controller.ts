@@ -28,6 +28,7 @@ const validateId = (res: Response, idString: string | undefined, userType: strin
     }
 }
 
+// send consistent error message
 const errorMessage = (res: Response, error: unknown) => {
     let message;
     if (error instanceof Error) message = error.message;
