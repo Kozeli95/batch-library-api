@@ -1,14 +1,8 @@
 import { Request, Response, NextFunction, response } from 'express';
-import axios, { AxiosResponse } from 'axios';
 import { Library } from '../models/library';
 
 var library = new Library();
 var counter = 1; // running counter to associate book IDs with
-
-export const testFunction = async (req: Request, res: Response, next: NextFunction) => {
-    let result: AxiosResponse = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
-    return res.send(result.data)
-};
 
 // validate id for each endpoint and send the appropriate message
 const validateId = (res: Response, idString: string | undefined, userType: string) => {

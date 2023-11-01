@@ -3,8 +3,6 @@ import * as controller from '../controllers/library.controller';
 
 const router = express.Router();
 
-router.get('/testRoute', controller.testFunction);
-
 router.post('/books/:isbn', controller.addBook);
 
 router.delete('/books/:bookId', controller.removeBook);
