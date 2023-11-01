@@ -38,7 +38,7 @@ const errorMessage = (res: Response, error: unknown) => {
     let message;
     if (error instanceof Error) message = error.message;
     else message = String(error);
-    res.status(409).send({
+    res.status(400).send({
         errorMessage: message
     });
 }
