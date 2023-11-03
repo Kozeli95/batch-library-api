@@ -50,4 +50,3 @@ We are now ready to start making requests to the api.
 To run tests on this project, simply run `jest` in the project root directory. If that does not work, try running `npm install jest -g` to install it globally first. 
 
 A NOTE ON TESTING: there seems to be a bug regarding closing express servers between tests in jest and supertest (see https://github.com/ladjs/supertest/issues/520 for more info) and as a result, the API functional tests unfortunately share state which needed to be manually tracked between tests. The tests still work, but this is NOT recommended or a best practice in the real world.
-# batch-library-api
