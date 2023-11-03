@@ -1,4 +1,3 @@
-import http from 'http';
 import express, { Express } from 'express';
 import morgan from 'morgan';
 import routes from './routes/index';
@@ -40,6 +39,7 @@ router.use((req, res, next) => {
 });
 
 //server
-const httpServer = http.createServer(router);
-const PORT: any = process.env.PORT ?? 3000;
-httpServer.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
+const PORT: any = 3000;
+const server = router.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
+
+module.exports = server;

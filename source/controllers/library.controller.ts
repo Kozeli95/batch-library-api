@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, response } from 'express';
+import { Request, Response } from 'express';
 import { Library } from '../models/library';
 
 var library = new Library();
@@ -46,6 +46,20 @@ export const addBook = async (req: Request, res: Response) => {
 
     const { isbn } = req.params;
     const { title, author } = req.body;
+
+    if (title === undefined) {
+        res.status(400).send({
+            errorMessage: 'Request body is missing book title.'
+        });
+        return;
+    }
+
+    if (author === undefined) {
+        res.status(400).send({
+            errorMessage: 'Request body is missing book author.'
+        });
+        return;
+    }
 
     try {
         library.addBook(counter, isbn, title, author);
@@ -138,7 +152,15 @@ export const getCheckedOutBooks = async (req: Request, res: Response) => {
 
     const userIdNumber = parseInt(idString!);
     const checkedOutBooks = library.getCheckedOutBooks(userIdNumber);
+    let response = []
+    for (let book of checkedOutBooks) {
+        response.push({
+            title: book.title,
+            author: book.author,
+            ISBN: book.ISBN
+        })
+    }
     res.status(200).send({
-        checkedOutBooks: checkedOutBooks
+        checkedOutBooks: response
     });
 };

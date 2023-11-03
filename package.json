@@ -27,6 +27,7 @@
     "jest-cli": "^29.7.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
+    "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
