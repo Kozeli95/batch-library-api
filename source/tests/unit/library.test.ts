@@ -147,10 +147,12 @@ describe('testing library checkoutBook() method', () => {
 
         let book = library.books.get(1);
         let user = library.users.get(2);
+        let dueDate = new Date();
+        dueDate.setDate(book!.checkoutDate!.getDate() + 14)
         expect(book!.checkedOut).toBe(true);
         expect(book!.checkoutDate).toBeInstanceOf(Date);
         expect(book!.dueDate).toBeInstanceOf(Date);
-        expect(book!.dueDate!.getDate()).toBe(book!.checkoutDate!.getDate() + 14);
+        expect(book!.dueDate!.getDate()).toBe(dueDate.getDate());
 
         expect(user!.books.size).toBe(1);
         expect(user!.books.get(1)).toEqual(book);
@@ -197,7 +199,9 @@ describe('testing library checkoutBook() method', () => {
         library.checkoutBook(1, 2);
         let user = library.users.get(2);
         let book = user!.books.get(1);
-        book!.dueDate!.setDate(book!.checkoutDate!.getDate() - 1)
+        let dueDate = new Date();
+        dueDate.setDate(book!.checkoutDate!.getDate() - 1);
+        book!.dueDate! = dueDate;
         user!.books.set(1, book!);
         expect(() => { library.checkoutBook(2, 2); }).toThrow(Error);
     })
@@ -211,10 +215,12 @@ describe('testing library returnBook() method', () => {
 
         let book = library.books.get(1);
         let user = library.users.get(2);
+        let dueDate = new Date();
+        dueDate.setDate(book!.checkoutDate!.getDate() + 14)
         expect(book!.checkedOut).toBe(true);
         expect(book!.checkoutDate).toBeInstanceOf(Date);
         expect(book!.dueDate).toBeInstanceOf(Date);
-        expect(book!.dueDate!.getDate()).toBe(book!.checkoutDate!.getDate() + 14);
+        expect(book!.dueDate!.getDate()).toBe(dueDate.getDate());
 
         expect(user!.books.size).toBe(1);
         expect(user!.books.get(1)).toEqual(book);
